@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "28341223584",
+    "project_id": "tp-final-maps",
+    "storage_bucket": "tp-final-maps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28341223584:android:5490bd12657334260c09c5",
+        "android_client_info": {
+          "package_name": "com.lavieille.lavieille_guilland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28341223584-spgp7hbs675t4ff5ml54o8epsj5ojkdt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lavieille.lavieille_guilland",
+            "certificate_hash": "9a2c1773e516b97eb918aa42ccd19ecdcfe08736"
+          }
+        },
+        {
+          "client_id": "28341223584-34q0aq0jjbbmjho653d3srfs7kdle2dr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGro70E_Y6gVGnl_ATMfj6MtGZE0TdfH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28341223584-34q0aq0jjbbmjho653d3srfs7kdle2dr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
