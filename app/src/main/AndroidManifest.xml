@@ -15,14 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lavieille_Guilland"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-        <activity
-            android:name=".map"
-            android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCy8poguEHK_gbd9J1E_JAJ6pPR2Mtp9pg" />
+        tools:targetApi="31" >
 
         <activity
             android:name=".LandingActivity"
@@ -33,9 +26,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".map"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCy8poguEHK_gbd9J1E_JAJ6pPR2Mtp9pg" />
     </application>
 
 </manifest>

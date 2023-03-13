@@ -31,7 +31,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<Location> arrayOfLocations = new ArrayList<Location>();
+    public ArrayList<Location> arrayOfLocations = new ArrayList<>();
     public LocationsAdapter adapter;
 
     @Override
