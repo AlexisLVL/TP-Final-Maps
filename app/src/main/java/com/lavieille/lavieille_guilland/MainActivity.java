@@ -18,6 +18,10 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
 import com.lavieille.lavieille_guilland.entity.Location;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -35,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_locations);
 
-        adapter = new LocationsAdapter(this, arrayOfLocations);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
