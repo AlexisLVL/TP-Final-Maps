@@ -2,10 +2,12 @@ package com.lavieille.lavieille_guilland;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -33,35 +36,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<Location> arrayOfLocations = new ArrayList<>();
-    public LocationsAdapter adapter;
-
-    ActivityResultLauncher<Intent> mainActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK){
-                    Intent data = result.getData();
-                    if (data != null){
-                        Location newLocation = (Location) data.getSerializableExtra("rep");
-                        arrayOfLocations.add(newLocation);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-    );
-
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_locations);
+        setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        final Button button = findViewById(R.id.button);
-        adapter = new LocationsAdapter(this, arrayOfLocations);
+        Intent responseIntent = getIntent();
+        Location location = (Location) responseIntent.getSerializableExtra("location");
 
-        ListView listView = findViewById(R.id.lvLocations);
-        listView.setAdapter(adapter);
+        ((TextView) findViewById(R.id.title)).setText(location.getTitle());
+        ((TextView) findViewById(R.id.address)).setText(location.getAddress());
+        ((TextView) findViewById(R.id.coordinates)).setText(location.getCoordinates());
+        ((TextView) findViewById(R.id.description)).setText(location.getDescription());
+        ((TextView) findViewById(R.id.note)).setText(location.getNote());
 
-        button.setOnClickListener(view -> mainActivityResultLauncher.launch(intent));
+        System.out.println();
+
     }
 }

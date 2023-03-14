@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -36,6 +37,8 @@ public class ListLocationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_locations);
+
+        Intent intent = new Intent(this, MainActivity.class);
 
         Button backButton = findViewById(R.id.BackButton);
         Button mapButton = findViewById(R.id.MapButton);
@@ -74,20 +77,23 @@ public class ListLocationsActivity extends AppCompatActivity {
         });
 
         listView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        System.out.println("Short Click");
-                    }
+                (adapterView, view, i, l) -> {
+                    Location location = new Location(
+                            ((String) ((TextView) view.findViewById(R.id.title)).getText()),
+                            ((String) ((TextView) view.findViewById(R.id.address)).getText()),
+                            ((String) ((TextView) view.findViewById(R.id.coordinates)).getText()),
+                            ((String) ((TextView) view.findViewById(R.id.description)).getText()),
+                            ((String) ((TextView) view.findViewById(R.id.note)).getText())
+                    );
+                    intent.putExtra("location", location);
+                    startActivity(intent);
+                    System.out.println("Short Click");
                 });
 
         listView.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        System.out.println("long Click");
-                        return false;
-                    }
+                (adapterView, view, i, l) -> {
+                    System.out.println("long Click");
+                    return false;
                 }
         );
 
