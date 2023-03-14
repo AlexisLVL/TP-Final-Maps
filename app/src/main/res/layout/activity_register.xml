@@ -72,7 +72,8 @@
             android:text="@string/register_title"
             android:layout_below="@id/userPassword"
             android:layout_marginVertical="40dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/_dark_green"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +92,8 @@
                 android:id="@+id/switch_to_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"/>
+                android:text="Login"
+                android:backgroundTint="@color/_dark_green"/>
 
         </LinearLayout>
 

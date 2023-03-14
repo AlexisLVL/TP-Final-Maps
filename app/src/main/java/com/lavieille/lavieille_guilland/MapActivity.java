@@ -8,7 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-public class map extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity {
     private GoogleMap googleMap;
     private MapView mapView;
 
