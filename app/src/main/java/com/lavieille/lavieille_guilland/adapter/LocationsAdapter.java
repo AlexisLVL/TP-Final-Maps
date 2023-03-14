@@ -43,7 +43,7 @@ public class LocationsAdapter extends ArrayAdapter<Location> {
             address.setText(location.getAddress() +  gap);
             coordinates.setText(location.getCoordinates() +  gap);
             description.setText(location.getDescription() +  gap);
-            note.setText(location.getNote() +  gap);
+            note.setText("Note " + location.getNote() +  "/10" + gap);
         }
         // Return the completed view to render on screen
         return convertView;

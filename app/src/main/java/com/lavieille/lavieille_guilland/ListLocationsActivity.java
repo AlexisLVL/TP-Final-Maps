@@ -43,7 +43,7 @@ public class ListLocationsActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button);
         adapter = new LocationsAdapter(this, arrayOfLocations);
 
-        ListView listView = (ListView) findViewById(R.id.lvLocations);
+        ListView listView = findViewById(R.id.lvLocations);
         listView.setAdapter(adapter);
 
         button.setOnClickListener(view -> {

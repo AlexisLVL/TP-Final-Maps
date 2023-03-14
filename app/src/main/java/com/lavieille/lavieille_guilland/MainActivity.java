@@ -2,10 +2,14 @@ package com.lavieille.lavieille_guilland;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_locations);
 
+        Button backButton = findViewById(R.id.BackButton);
+        Button mapButton = findViewById(R.id.MapButton);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -61,12 +67,34 @@ public class MainActivity extends AppCompatActivity {
                             arrayOfLocations.add(newLocation);
                             adapter.notifyDataSetChanged();
                         }
-
                     });
                 }
             } catch (Exception e) {
                 Log.e("Error : connexion", e.getLocalizedMessage());
             }
+        });
+
+        listView.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    System.out.println("Short Click");
+                }
+        });
+
+        listView.setOnItemLongClickListener(
+            new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    System.out.println("long Click");
+                    return false;
+                }
+            }
+        );
+
+        backButton.setOnClickListener(view -> {
+            //Intent intent = new Intent(this, MainActivity.class);
+            //startActivity(intent);
         });
     }
 

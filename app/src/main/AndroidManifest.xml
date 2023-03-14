@@ -24,7 +24,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyCy8poguEHK_gbd9J1E_JAJ6pPR2Mtp9pg" />
         <activity
-            android:name=".ListLocationsActivity"
+            android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,11 +45,14 @@ xmlns:tools="http://schemas.android.com/tools">
 
 </manifest>=======
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<application>
-    <activity
-        android:name="com.lavieille.lavieille_guilland.connexion"
-        android:exported="false"
+        <activity
+            android:name=".ListLocationsActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCy8poguEHK_gbd9J1E_JAJ6pPR2Mtp9pg" />
+    </application>
 
         />
 </application>
