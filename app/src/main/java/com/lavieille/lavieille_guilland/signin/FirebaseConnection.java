@@ -1,30 +1,35 @@
 package com.lavieille.lavieille_guilland.signin;
 
-import android.widget.Toast;
+import android.app.Activity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lavieille.lavieille_guilland.LandingActivity;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class FirebaseConnection {
-    private LandingActivity activity;
+    private Activity activity;
     private FirebaseAuth mAuth;
 
-    public FirebaseConnection(LandingActivity activity) {
+    public FirebaseConnection(Activity activity) {
         this.activity = activity;
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void createAccount(String email, String password) {
+    public boolean createAccount(String email, String password) {
+
+        AtomicBoolean success = new AtomicBoolean(false);
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, task -> {
                     if (task.isSuccessful()) {
+                        success.set(true);
                         //TODO switch activity and where do we need to keep datas (UID of user etc) ?
                     } else {
-                        Toast.makeText(
-                                        activity, "Erreur lors de l'authentification !", Toast.LENGTH_LONG)
-                                .show();
+                        success.set(false);
                     }
                 });
+
+        return success.get();
     }
 }

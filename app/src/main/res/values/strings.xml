@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Lavieille_Guilland</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- RegisterActivity -->
+    <string name="register_title">Register</string>
 </resources>
