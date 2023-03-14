@@ -1,16 +1,11 @@
 package com.lavieille.lavieille_guilland;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -44,26 +39,29 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper());
 
         ListView listView = findViewById(R.id.lvLocations);
+        adapter = new LocationsAdapter(this, arrayOfLocations);
         listView.setAdapter(adapter);
 
         executor.execute(() -> {
             try {
                 URL url = new URL   ("http://tp3.hexteckgate.ga/api.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                     BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String jsonData = input.readLine();
                     input.close();
 
                     ArrayList<LinkedTreeMap<String, String>> jsonDataTable = makeIntoTable(jsonData);
-                    System.out.println(jsonDataTable);
+
                     handler.post(() -> {
                         for (LinkedTreeMap<String, String> tmp :
                         jsonDataTable) {
                             Location newLocation = new Location(tmp.get("title"), tmp.get("address"), tmp.get("coordinates"), tmp.get("description"),tmp.get("note"));
                             arrayOfLocations.add(newLocation);
+                            adapter.notifyDataSetChanged();
                         }
-                        adapter.notifyDataSetChanged();
+
                     });
                 }
             } catch (Exception e) {

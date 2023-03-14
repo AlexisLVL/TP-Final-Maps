@@ -24,15 +24,12 @@ public class Location implements Serializable {
     public String getAddress() {
         return address;
     }
-
     public String getCoordinates() {
         return coordinates;
     }
-
     public String getDescription() {
         return description;
     }
-
     public String getNote() {
         return note;
     }
