@@ -4,6 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textview_height">25dp</dimen>
     <dimen name="textview_width">150dp</dimen>
-    <dimen name="ball_radius">30dp</dimen>
+    <dimen name="ball_radius">25dp</dimen>
     <dimen name="font_size">40sp</dimen>
 </resources>

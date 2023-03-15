@@ -98,8 +98,8 @@ public class ListLocationsActivity extends AppCompatActivity {
         );
 
         backButton.setOnClickListener(view -> {
-            //Intent intent = new Intent(this, MainActivity.class);
-            //startActivity(intent);
+            Intent intentMapActivity = new Intent(this, MapActivity.class);
+            startActivity(intentMapActivity);
         });
     }
 
