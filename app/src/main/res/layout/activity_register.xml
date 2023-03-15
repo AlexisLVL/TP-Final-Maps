@@ -35,10 +35,10 @@
             android:textColorHint="@color/white"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
-            android:background="@color/_dark_green"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/register_title"/>
+            android:layout_below="@id/register_title"
+            android:background="@drawable/rounded_edittext_focused"/>
 
         <EditText
             android:id="@+id/userEmail"
@@ -49,12 +49,12 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:inputType="textEmailAddress"
-            android:background="@color/_dark_green"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/userPseudo"/>
+            android:layout_below="@id/userPseudo"
+            android:background="@drawable/rounded_edittext_focused"/>
 
         <EditText
             android:id="@+id/userPassword"
@@ -66,11 +66,11 @@
             android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:paddingHorizontal="10dp"
-            android:background="@color/_dark_green"
             android:paddingVertical="5dp"
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/userEmail"/>
+            android:layout_below="@id/userEmail"
+            android:background="@drawable/rounded_edittext_focused"/>
 
         <Button
             android:id="@+id/register_button"
