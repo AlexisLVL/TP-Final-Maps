@@ -7,10 +7,6 @@
     tools:context=".LandingActivity"
     android:background="@color/white">
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   <ImageView
       android:adjustViewBounds="true"
       android:id="@+id/runner"
