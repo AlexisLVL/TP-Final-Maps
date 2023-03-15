@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MapActivity extends AppCompatActivity {
@@ -34,7 +37,12 @@ public class MapActivity extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap map) {
+
                 googleMap = map;
+                LatLng lyon = new LatLng(45.7640, 4.8357);
+                map.addMarker(new MarkerOptions().position(lyon).title("Marker in lyon"));
+                // Déplacer la caméra pour que le marqueur soit centré sur la carte
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 12));
             }
         });
         viewLikedPlace.setOnClickListener(view -> {
