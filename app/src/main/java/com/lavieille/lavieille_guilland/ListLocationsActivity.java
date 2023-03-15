@@ -2,6 +2,7 @@ package com.lavieille.lavieille_guilland;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -10,12 +11,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
@@ -100,6 +103,31 @@ public class ListLocationsActivity extends AppCompatActivity {
         backButton.setOnClickListener(view -> {
             Intent intentMapActivity = new Intent(this, MapActivity.class);
             startActivity(intentMapActivity);
+        });
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        // Gérer l'événement de sélection pour l'élément Home
+                        return true;
+                    case R.id.navigation_map:
+                        // Gérer l'événement de sélection pour l'élément Search
+                        return true;
+                    case R.id.navigation_settings:
+                        Intent intentRegisterActivity = new Intent(ListLocationsActivity.this, LandingActivity.class);
+                        startActivity(intentRegisterActivity);
+                        return true;
+                    case R.id.navigation_logout:
+                        Intent intentLogIn = new Intent(ListLocationsActivity.this, RegisterActivity.class);
+                        startActivity(intentLogIn);
+                        return true;
+                }
+                return false;
+            }
         });
     }
 
