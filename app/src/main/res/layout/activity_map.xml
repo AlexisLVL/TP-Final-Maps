@@ -4,11 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapActivity">
+    tools:context=".MapActivity"
+    android:background="@color/white">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="381dp"
+        android:layout_height="477dp"
+        android:background="@drawable/rounded_edittext_focused"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+
+        android:id="@+id/mapText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        android:textColor="@color/_dark_green"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mapView"/>
+
+    <Button
+        android:id="@+id/viewLikedPlaceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Liked Place"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+
+
+        android:backgroundTint="@color/_dark_green"
+        android:textColor="@color/white"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
