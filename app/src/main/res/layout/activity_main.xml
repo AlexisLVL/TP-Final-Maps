@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
-    android:background="@color/white"
     android:paddingHorizontal="20dp"
     android:paddingVertical="10dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/green">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,7 +17,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            tools:layout_editor_absoluteX="20dp">
+            tools:layout_editor_absoluteX="20dp"
+            android:background="@color/white"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="10dp">
 
                 <TextView
                     android:id="@+id/address"
