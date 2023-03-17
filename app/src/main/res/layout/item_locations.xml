@@ -8,14 +8,15 @@
 
     <androidx.cardview.widget.CardView
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
         android:layout_marginBottom="5dp"
         android:background="@color/white"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp"
+        android:paddingVertical="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
             android:id="@+id/item">
 
             <TextView

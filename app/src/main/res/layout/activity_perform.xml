@@ -4,8 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Perform">
+    tools:context=".Perform"
+    android:background="@color/green">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/runnerdraw"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/activityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="412dp"
+        android:textSize="@dimen/ball_radius"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/runCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/activityText"
+        app:layout_constraintStart_toStartOf="parent">
+        <ImageView
+            android:id="@+id/runIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/run_icon"/>
+        <TextView
+            android:id="@+id/runText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Run" />
+
+        <TextView
+            android:id="@+id/kmRunText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20/30 km" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stepCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/activityText"
+        app:layout_constraintStart_toStartOf="parent">
+        <ImageView
+            android:id="@+id/stepIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/walk_icon"/>
+        <TextView
+            android:id="@+id/stepText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step" />
+
+        <TextView
+            android:id="@+id/kmStepText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20/30 km" />
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
