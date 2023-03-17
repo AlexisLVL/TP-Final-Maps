@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,8 +44,8 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
 
-        Button backButton = findViewById(R.id.BackButton);
-        Button mapButton = findViewById(R.id.MapButton);
+        ImageButton backButton = findViewById(R.id.BackButton);
+        ImageButton mapButton = findViewById(R.id.MapButton);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());

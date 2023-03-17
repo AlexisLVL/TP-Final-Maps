@@ -27,30 +27,35 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/green" >
 
-        <Button
+        <ImageButton
             android:id="@+id/BackButton"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
-            android:text="s"
             android:layout_alignParentLeft="true"
-            android:backgroundTint="@color/green" />
+            android:backgroundTint="@color/green"
+            app:srcCompat="@drawable/return_icon"/>
+
 
         <TextView
             android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:layout_marginTop="0dp"
             android:text="List"
-            android:layout_centerInParent="true"/>
+            android:textSize="@dimen/ball_radius"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="@color/_dark_green"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/MapButton"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Map"
             android:layout_alignParentRight="true"
-            android:backgroundTint="@color/green"/>
+            android:backgroundTint="@color/green"
+            app:srcCompat="@drawable/location_icon"/>
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
