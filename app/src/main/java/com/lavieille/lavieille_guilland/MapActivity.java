@@ -17,6 +17,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lavieille.lavieille_guilland.entity.Location;
+
+import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
@@ -39,6 +42,17 @@ public class MapActivity extends AppCompatActivity {
             public void onMapReady(GoogleMap map) {
 
                 googleMap = map;
+
+                Intent responseIntent = getIntent();
+                ArrayList<Location> arrayOfLocations = (ArrayList<Location>) responseIntent.getSerializableExtra("arrayOfLocations");
+
+                for (Location location:
+                     arrayOfLocations) {
+                    String[] latLng = location.getCoordinates().split(", ");
+                    LatLng park = new LatLng(Double.parseDouble(latLng[0]), Double.parseDouble(latLng[1]));
+                    map.addMarker(new MarkerOptions().position(park).title("Marker in " + location.getTitle()));
+                }
+
                 LatLng lyon = new LatLng(45.7640, 4.8357);
                 map.addMarker(new MarkerOptions().position(lyon).title("Marker in lyon"));
                 // Déplacer la caméra pour que le marqueur soit centré sur la carte

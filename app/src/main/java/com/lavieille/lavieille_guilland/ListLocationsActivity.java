@@ -1,20 +1,14 @@
 package com.lavieille.lavieille_guilland;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +18,8 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
 import com.lavieille.lavieille_guilland.entity.Location;
+import com.lavieille.lavieille_guilland.favorite.DBFavorites;
+import com.lavieille.lavieille_guilland.signin.FirebaseConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -55,6 +51,11 @@ public class ListLocationsActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         executor.execute(() -> {
+            DBFavorites db = new DBFavorites();
+            //db.addFavorite(FirebaseConnection.getUser().getUid(), "2");
+            //db.removeFavorite(FirebaseConnection.getUser().getUid(), "2");
+            //db.getFavorites(FirebaseConnection.getUser().getUid());
+
             try {
                 URL url = new URL   ("http://tp3.hexteckgate.ga/api.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -82,13 +83,13 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
-                    Location location = new Location(
-                            ((String) ((TextView) view.findViewById(R.id.title)).getText()),
-                            ((String) ((TextView) view.findViewById(R.id.address)).getText()),
-                            ((String) ((TextView) view.findViewById(R.id.coordinates)).getText()),
-                            ((String) ((TextView) view.findViewById(R.id.description)).getText()),
-                            ((String) ((TextView) view.findViewById(R.id.note)).getText())
-                    );
+                    Location location = null;
+                    for (Location locationInArray:
+                         arrayOfLocations) {
+                        if ((String) ((TextView) view.findViewById(R.id.title)).getText() == locationInArray.getTitle()){
+                            location = locationInArray;
+                        }
+                    }
                     intent.putExtra("location", location);
                     startActivity(intent);
                     System.out.println("Short Click");
@@ -96,8 +97,10 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(
                 (adapterView, view, i, l) -> {
-                    System.out.println("long Click");
-                    return false;
+
+
+
+                    return true;
                 }
         );
 
@@ -117,6 +120,9 @@ public class ListLocationsActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_map:
                         // Gérer l'événement de sélection pour l'élément Search
+                        Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
+                        map.putExtra("arrayOfLocations", arrayOfLocations);
+                        startActivity(map);
                         return true;
                     case R.id.navigation_settings:
                         Intent intentRegisterActivity = new Intent(ListLocationsActivity.this, LandingActivity.class);

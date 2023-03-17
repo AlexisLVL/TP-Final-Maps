@@ -20,8 +20,8 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
         findViewById(R.id.logInButton).setOnClickListener(view -> {
             FirebaseConnection connection = new FirebaseConnection(this);
 
-            String email = ((EditText) findViewById(R.id.userEmail)).getText().toString();
-            String password = ((EditText) findViewById(R.id.userPassword)).getText().toString();
+            String email = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
+            String password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
 
             connection.connectAccount(email, password);
         });
@@ -39,7 +39,8 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
 
     @Override
     public void authSuccess() {
-        // TODO SWITCH TO THE RIGHT ACTIVITY AFTER LOGIN
+        Intent intent = new Intent(this, ListLocationsActivity.class);
+        startActivity(intent);
     }
 
     @Override

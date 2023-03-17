@@ -52,6 +52,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/textview_height"
+        android:background="@drawable/rounded_edittext_focused"
+        android:elevation="10dp"
+        android:ems="10"
+        android:hint="Username, Email, Phone"
+        android:text="guillandrichard@gmail.com"
+        android:inputType="textPersonName"
+        android:padding="7dp"
+
+        android:textColorHint="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textConnexion" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/textview_height"
+        android:background="@drawable/rounded_edittext_focused"
+        android:elevation="10dp"
+        android:ems="10"
+        android:hint="Password"
+        android:text="hexteckgate"
+        android:inputType="textPassword"
+        android:padding="7dp"
+
+        android:textColorHint="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+
     <Button
         android:id="@+id/logInButton"
         android:layout_width="wrap_content"
@@ -65,45 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paswordEditText" />
-
-    <EditText
-        android:id="@+id/nameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textview_height"
-        android:background="@drawable/rounded_edittext_focused"
-        android:elevation="10dp"
-        android:ems="10"
-        android:hint="Username, Email, Phone"
-        android:inputType="textPersonName"
-        android:padding="7dp"
-
-        android:textColorHint="@color/white"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textConnexion" />
-
-    <EditText
-        android:id="@+id/paswordEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textview_height"
-        android:background="@drawable/rounded_edittext_focused"
-        android:elevation="10dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="7dp"
-
-        android:textColorHint="@color/white"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
     <TextView
         android:id="@+id/registerNowButton"

@@ -32,6 +32,7 @@ public class FirebaseConnection {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) activity, task -> {
                     if (task.isSuccessful()) {
+                        user = task.getResult().getUser();
                         activity.authSuccess();
                     } else {
                         activity.authFailure();

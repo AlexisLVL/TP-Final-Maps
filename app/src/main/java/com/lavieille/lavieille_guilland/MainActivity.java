@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.address)).setText(location.getAddress());
         ((TextView) findViewById(R.id.coordinates)).setText(location.getCoordinates());
         ((TextView) findViewById(R.id.description)).setText(location.getDescription());
-        ((TextView) findViewById(R.id.note)).setText(location.getNote());
+        ((TextView) findViewById(R.id.note)).setText("Note " + location.getNote() +  "/10");
 
         System.out.println();
 

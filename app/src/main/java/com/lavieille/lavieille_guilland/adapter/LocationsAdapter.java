@@ -32,18 +32,12 @@ public class LocationsAdapter extends ArrayAdapter<Location> {
         // Lookup view for data population
         if (location != null) {
             TextView title = convertView.findViewById(R.id.title);
-            TextView address = convertView.findViewById(R.id.address);
-            TextView coordinates = convertView.findViewById(R.id.coordinates);
-            TextView description = convertView.findViewById(R.id.description);
             TextView note = convertView.findViewById(R.id.note);
             // Populate the data into the template view using the data object
 
             String gap = " ";
-            title.setText(location.getTitle() +  gap);
-            address.setText(location.getAddress() +  gap);
-            coordinates.setText(location.getCoordinates() +  gap);
-            description.setText(location.getDescription() +  gap);
-            note.setText("Note " + location.getNote() +  "/10" + gap);
+            title.setText(location.getTitle());
+            note.setText("Note " + location.getNote() +  "/10");
         }
         // Return the completed view to render on screen
         return convertView;
