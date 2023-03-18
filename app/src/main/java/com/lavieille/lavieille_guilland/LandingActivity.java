@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.lavieille.lavieille_guilland.signin.AuthSuccess;
-import com.lavieille.lavieille_guilland.signin.FirebaseConnection;
+import com.lavieille.lavieille_guilland.utils.CheckConnection;
+import com.lavieille.lavieille_guilland.utils.signin.AuthSuccess;
+import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 public class LandingActivity extends AppCompatActivity implements AuthSuccess {
 
@@ -45,8 +46,12 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
 
     @Override
     public void authFailure() {
+        String message = "Email ou mot de passe incorrecte.";
+        if (!CheckConnection.isInternetAvailable(this)) {
+            message = "Pas de connection à internet.";
+        }
         Toast.makeText(
-                this, "Email or password incorrect.", Toast.LENGTH_LONG
+                this, message, Toast.LENGTH_LONG
         ).show();
     }
 }

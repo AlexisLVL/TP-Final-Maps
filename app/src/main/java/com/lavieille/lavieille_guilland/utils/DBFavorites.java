@@ -1,4 +1,4 @@
-package com.lavieille.lavieille_guilland.favorite;
+package com.lavieille.lavieille_guilland.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

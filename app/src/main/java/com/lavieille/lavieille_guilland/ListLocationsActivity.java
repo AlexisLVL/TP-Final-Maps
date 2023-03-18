@@ -3,6 +3,7 @@ package com.lavieille.lavieille_guilland;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,16 +17,19 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
 import com.lavieille.lavieille_guilland.entity.Location;
-import com.lavieille.lavieille_guilland.favorite.DBFavorites;
-import com.lavieille.lavieille_guilland.signin.FirebaseConnection;
+import com.lavieille.lavieille_guilland.utils.DBFavorites;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,6 +37,7 @@ public class ListLocationsActivity extends AppCompatActivity {
     public ArrayList<Location> arrayOfLocations = new ArrayList<>();
     public LocationsAdapter adapter;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +56,6 @@ public class ListLocationsActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         executor.execute(() -> {
-            DBFavorites db = new DBFavorites();
-            //db.addFavorite(FirebaseConnection.getUser().getUid(), "2");
-            //db.removeFavorite(FirebaseConnection.getUser().getUid(), "2");
-            //db.getFavorites(FirebaseConnection.getUser().getUid());
-
             try {
                 URL url = new URL   ("http://tp3.hexteckgate.ga/api.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -86,7 +86,7 @@ public class ListLocationsActivity extends AppCompatActivity {
                     Location location = null;
                     for (Location locationInArray:
                          arrayOfLocations) {
-                        if ((String) ((TextView) view.findViewById(R.id.title)).getText() == locationInArray.getTitle()){
+                        if (Objects.equals((String) ((TextView) view.findViewById(R.id.title)).getText(), locationInArray.getTitle())){
                             location = locationInArray;
                         }
                     }
@@ -97,7 +97,12 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(
                 (adapterView, view, i, l) -> {
-
+                    Executors.newSingleThreadExecutor().execute(() -> {
+                        DBFavorites db = new DBFavorites();
+                        //db.addFavorite(FirebaseConnection.getUser().getUid(), "2");
+                        //db.removeFavorite(FirebaseConnection.getUser().getUid(), "2");
+                        //db.getFavorites(FirebaseConnection.getUser().getUid());
+                    });
 
 
                     return true;
@@ -111,34 +116,31 @@ public class ListLocationsActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        // Gérer l'événement de sélection pour l'élément Home
-                        return true;
-                    case R.id.navigation_map:
-                        // Gérer l'événement de sélection pour l'élément Search
-                        Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
-                        map.putExtra("arrayOfLocations", arrayOfLocations);
-                        startActivity(map);
-                        return true;
-                    case R.id.navigation_settings:
-                        Intent intentRegisterActivity = new Intent(ListLocationsActivity.this, LandingActivity.class);
-                        startActivity(intentRegisterActivity);
-                        return true;
-                    case R.id.navigation_logout:
-                        Intent intentLogIn = new Intent(ListLocationsActivity.this, RegisterActivity.class);
-                        startActivity(intentLogIn);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    // Gérer l'événement de sélection pour l'élément Home
+                    return true;
+                case R.id.navigation_map:
+                    // Gérer l'événement de sélection pour l'élément Search
+                    Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
+                    map.putExtra("arrayOfLocations", arrayOfLocations);
+                    startActivity(map);
+                    return true;
+                case R.id.navigation_settings:
+                    Intent intentRegisterActivity = new Intent(ListLocationsActivity.this, LandingActivity.class);
+                    startActivity(intentRegisterActivity);
+                    return true;
+                case R.id.navigation_logout:
+                    Intent intentLogIn = new Intent(ListLocationsActivity.this, RegisterActivity.class);
+                    startActivity(intentLogIn);
+                    return true;
             }
+            return false;
         });
     }
 
     private ArrayList<LinkedTreeMap<String, String>> makeIntoTable(String json){
-        return new Gson().fromJson(json, ArrayList.class);
+        return new Gson().fromJson(json, new TypeToken<ArrayList<LinkedTreeMap<String, String>>>(){}.getType());
     }
 }

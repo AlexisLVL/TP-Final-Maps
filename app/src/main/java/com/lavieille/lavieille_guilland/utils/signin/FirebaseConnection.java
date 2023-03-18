@@ -1,11 +1,9 @@
-package com.lavieille.lavieille_guilland.signin;
+package com.lavieille.lavieille_guilland.utils.signin;
 
 import android.app.Activity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FirebaseConnection {
     private AuthSuccess activity;
