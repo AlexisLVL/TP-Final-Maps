@@ -120,14 +120,10 @@ public class ListLocationsActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-<<<<<<< HEAD
                     Intent intentPerform = new Intent(ListLocationsActivity.this, Perform.class);
                     startActivity(intentPerform);
                      return true;
-=======
-                    return true;
 
->>>>>>> dev
                 case R.id.navigation_map:
                     Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
                     map.putExtra("arrayOfLocations", arrayOfLocations);

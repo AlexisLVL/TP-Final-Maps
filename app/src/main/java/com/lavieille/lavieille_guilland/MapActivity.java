@@ -42,8 +42,8 @@ public class MapActivity extends AppCompatActivity {
             Intent responseIntent = getIntent();
             ArrayList<Location> arrayOfLocations = (ArrayList<Location>) responseIntent.getSerializableExtra("arrayOfLocations");
 
-            for (Location location:
-                 arrayOfLocations) {
+            for (Location location :
+                    arrayOfLocations) {
                 String[] latLng = location.getCoordinates().split(", ");
                 LatLng park = new LatLng(Double.parseDouble(latLng[0]), Double.parseDouble(latLng[1]));
                 map.addMarker(new MarkerOptions().position(park).title("Marker in " + location.getTitle()));
@@ -61,7 +61,6 @@ public class MapActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-<<<<<<< HEAD
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -81,29 +80,11 @@ public class MapActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
-=======
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    return true;
-
-                case R.id.navigation_map:
-                    return true;
-
-                case R.id.navigation_settings:
-                    Intent intentRegisterActivity = new Intent(MapActivity.this, LandingActivity.class);
-                    startActivity(intentRegisterActivity);
-                    return true;
-
-                case R.id.navigation_logout:
-                    Intent intentLogIn = new Intent(MapActivity.this, RegisterActivity.class);
-                    startActivity(intentLogIn);
-                    return true;
->>>>>>> dev
             }
-            return false;
         });
     }
+
+
     @Override
     public void onResume() {
         super.onResume();
