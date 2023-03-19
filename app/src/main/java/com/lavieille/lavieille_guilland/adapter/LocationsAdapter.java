@@ -35,7 +35,6 @@ public class LocationsAdapter extends ArrayAdapter<Location> {
             TextView note = convertView.findViewById(R.id.note);
             // Populate the data into the template view using the data object
 
-            String gap = " ";
             title.setText(location.getTitle());
             note.setText("Note " + location.getNote() +  "/10");
         }

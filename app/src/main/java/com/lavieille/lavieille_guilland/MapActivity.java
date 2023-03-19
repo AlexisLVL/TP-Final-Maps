@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class MapActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private MapView mapView;
-    private Button viewLikedPlace;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -34,7 +33,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
 
 
-        viewLikedPlace = findViewById(R.id.viewLikedPlaceButton);
+        Button viewLikedPlace = findViewById(R.id.viewLikedPlaceButton);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
