@@ -4,6 +4,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,10 +24,10 @@ import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
-    private GoogleMap googleMap;
     private MapView mapView;
     private Button viewLikedPlace;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,27 +38,21 @@ public class MapActivity extends AppCompatActivity {
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap map) {
+        mapView.getMapAsync(map -> {
+            Intent responseIntent = getIntent();
+            ArrayList<Location> arrayOfLocations = (ArrayList<Location>) responseIntent.getSerializableExtra("arrayOfLocations");
 
-                googleMap = map;
-
-                Intent responseIntent = getIntent();
-                ArrayList<Location> arrayOfLocations = (ArrayList<Location>) responseIntent.getSerializableExtra("arrayOfLocations");
-
-                for (Location location:
-                     arrayOfLocations) {
-                    String[] latLng = location.getCoordinates().split(", ");
-                    LatLng park = new LatLng(Double.parseDouble(latLng[0]), Double.parseDouble(latLng[1]));
-                    map.addMarker(new MarkerOptions().position(park).title("Marker in " + location.getTitle()));
-                }
-
-                LatLng lyon = new LatLng(45.7640, 4.8357);
-                map.addMarker(new MarkerOptions().position(lyon).title("Marker in lyon"));
-                // Déplacer la caméra pour que le marqueur soit centré sur la carte
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 12));
+            for (Location location:
+                 arrayOfLocations) {
+                String[] latLng = location.getCoordinates().split(", ");
+                LatLng park = new LatLng(Double.parseDouble(latLng[0]), Double.parseDouble(latLng[1]));
+                map.addMarker(new MarkerOptions().position(park).title("Marker in " + location.getTitle()));
             }
+
+            LatLng lyon = new LatLng(45.7640, 4.8357);
+            map.addMarker(new MarkerOptions().position(lyon).title("Marker in lyon"));
+            // Déplacer la caméra pour que le marqueur soit centré sur la carte
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 12));
         });
         viewLikedPlace.setOnClickListener(view -> {
             Intent intentListLocations = new Intent(MapActivity.this, ListLocationsActivity.class);
@@ -66,6 +61,7 @@ public class MapActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+<<<<<<< HEAD
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -85,7 +81,27 @@ public class MapActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+=======
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    return true;
+
+                case R.id.navigation_map:
+                    return true;
+
+                case R.id.navigation_settings:
+                    Intent intentRegisterActivity = new Intent(MapActivity.this, LandingActivity.class);
+                    startActivity(intentRegisterActivity);
+                    return true;
+
+                case R.id.navigation_logout:
+                    Intent intentLogIn = new Intent(MapActivity.this, RegisterActivity.class);
+                    startActivity(intentLogIn);
+                    return true;
+>>>>>>> dev
             }
+            return false;
         });
     }
     @Override

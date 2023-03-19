@@ -7,23 +7,6 @@
     tools:context=".MapActivity"
     android:background="@color/green">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/mapView"
-        android:layout_width="381dp"
-        android:layout_height="477dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/viewLikedPlaceButton">
-
-        <com.google.android.gms.maps.MapView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_edittext_focused" />
-
-    </androidx.cardview.widget.CardView>
-
     <TextView
         android:id="@+id/mapText"
         android:layout_width="wrap_content"
@@ -37,7 +20,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mapView"/>
+        app:layout_constraintBottom_toTopOf="@id/mapCard"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mapCard"
+        android:layout_width="381dp"
+        android:layout_height="477dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/viewLikedPlaceButton">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_edittext_focused" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/viewLikedPlaceButton"
@@ -52,7 +53,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapView"
+        app:layout_constraintTop_toBottomOf="@id/mapCard"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

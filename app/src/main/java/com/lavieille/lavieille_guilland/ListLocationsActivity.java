@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
 import com.lavieille.lavieille_guilland.entity.Location;
 import com.lavieille.lavieille_guilland.utils.DBFavorites;
+import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -99,37 +100,43 @@ public class ListLocationsActivity extends AppCompatActivity {
                 (adapterView, view, i, l) -> {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         DBFavorites db = new DBFavorites();
-                        //db.addFavorite(FirebaseConnection.getUser().getUid(), "2");
-                        //db.removeFavorite(FirebaseConnection.getUser().getUid(), "2");
-                        //db.getFavorites(FirebaseConnection.getUser().getUid());
+                        if (db.isFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i))) {
+                            db.removeFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i));
+                        } else {
+                            db.addFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i));
+                        }
                     });
-
-
                     return true;
                 }
         );
 
         backButton.setOnClickListener(view -> {
             Intent intentMapActivity = new Intent(this, MapActivity.class);
+            intentMapActivity.putExtra("arrayOfLocations", arrayOfLocations);
             startActivity(intentMapActivity);
         });
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+<<<<<<< HEAD
                     Intent intentPerform = new Intent(ListLocationsActivity.this, Perform.class);
                     startActivity(intentPerform);
                      return true;
+=======
+                    return true;
+
+>>>>>>> dev
                 case R.id.navigation_map:
-                    // Gérer l'événement de sélection pour l'élément Search
                     Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
                     map.putExtra("arrayOfLocations", arrayOfLocations);
                     startActivity(map);
                     return true;
+
                 case R.id.navigation_settings:
                     return true;
+
                 case R.id.navigation_logout:
                     Intent intentLogIn = new Intent(ListLocationsActivity.this, LandingActivity.class);
                     startActivity(intentLogIn);

@@ -16,5 +16,4 @@
         android:id="@+id/navigation_logout"
         android:icon="@drawable/logout"
         android:title="Log Out" />
-
 </menu>

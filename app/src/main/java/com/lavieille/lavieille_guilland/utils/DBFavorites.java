@@ -35,9 +35,7 @@ public class DBFavorites {
             }
 
             return favorites;
-        } catch (Exception ignored) {
-            System.out.println(ignored);
-        }
+        } catch (Exception ignored) {}
 
         return new ArrayList<>();
     }
@@ -50,10 +48,7 @@ public class DBFavorites {
             statement.execute();
 
             return true;
-        } catch (Exception ignored) {
-            System.out.println(ignored);
-            System.out.println("Ouaip wtf");
-        }
+        } catch (Exception ignored) {}
 
         return false;
     }
@@ -66,9 +61,19 @@ public class DBFavorites {
             statement.execute();
 
             return true;
-        } catch (Exception ignored) {
-            System.out.println(ignored);
-        }
+        } catch (Exception ignored) {}
+
+        return false;
+    }
+
+    public boolean isFavorite(String uid, String favoriteID) {
+        getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserFavorites WHERE userUid = '" + uid + "' and favoriteId = '" + favoriteID + "'");
+            statement.execute();
+            return statement.getResultSet().next();
+        } catch (Exception ignored) {}
 
         return false;
     }
