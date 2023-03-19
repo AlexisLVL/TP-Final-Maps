@@ -7,117 +7,124 @@
     android:background="@color/white"
     tools:context=".LandingActivity">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/constraintLayout"
+  <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_margin="20dp"
-
+      android:layout_height="wrap_content"
+      app:cardCornerRadius="10dp"
       android:background="@color/green"
-
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/runner"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/runner">
+      android:layout_margin="20dp">
 
-    <TextView
-        android:id="@+id/textConnexion"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/textview_height"
+        android:paddingBottom="20dp"
 
-        android:fontFamily="sans-serif"
-        android:text="@string/connexion"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_size"
-        android:textStyle="bold"
+        android:background="@color/green"
 
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/runner">
 
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textview_height"
-        android:background="@drawable/rounded_edittext_focused"
-        android:inputType="textPersonName"
-        android:padding="7dp"
+      <TextView
+          android:id="@+id/textConnexion"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="sans-serif"
 
-        android:hint="@string/username_email_phone"
-        android:elevation="10dp"
-        android:ems="10"
-        android:text="guillandrichard@gmail.com"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+          android:paddingTop="20dp"
+          android:text="@string/connexion"
+          android:textColor="@color/black"
+          android:textSize="@dimen/font_size"
+          android:textStyle="bold"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textConnexion" />
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textview_height"
-        android:background="@drawable/rounded_edittext_focused"
-        android:inputType="textPassword"
-        android:padding="7dp"
+      <EditText
+          android:id="@+id/usernameInput"
+          android:layout_width="250dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/textview_height"
+          android:background="@drawable/rounded_edittext_focused"
+          android:elevation="10dp"
+          android:ems="10"
 
-        android:elevation="10dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:text="hexteckgate"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+          android:hint="@string/username_email_phone"
+          android:inputType="textPersonName"
+          android:padding="7dp"
+          android:text="guillandrichard@gmail.com"
+          android:textColor="@color/white"
+          android:textColorHint="@color/white"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/textConnexion" />
 
-    <Button
-        android:id="@+id/logInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textview_height"
-        android:backgroundTint="@color/_dark_green"
+      <EditText
+          android:id="@+id/passwordInput"
+          android:layout_width="250dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/rounded_edittext_focused"
+          android:elevation="10dp"
+          android:ems="10"
 
-        android:text="@string/log_in"
-        android:textColor="@color/white"
+          android:hint="@string/password"
+          android:inputType="textPassword"
+          android:padding="7dp"
+          android:text="hexteckgate"
+          android:textColor="@color/white"
+          android:textColorHint="@color/white"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
 
-    <TextView
-        android:id="@+id/dontHaveAccountText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+      <Button
+          android:id="@+id/logInButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="40dp"
+          android:backgroundTint="@color/_dark_green"
 
-        android:text="@string/don_t_have_an_account"
-        android:textColor="@color/_dark_green"
+          android:text="@string/log_in"
+          android:textColor="@color/white"
 
-        app:layout_constraintTop_toBottomOf="@id/logInButton"
-        app:layout_constraintStart_toStartOf="parent" />
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
-    <TextView
-        android:id="@+id/registerNowButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp"
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="40dp"
+          android:gravity="center"
+          app:layout_constraintTop_toBottomOf="@id/logInButton">
 
-        android:text="@string/register_now"
-        android:textColor="@color/_dark_green"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="@string/don_t_have_an_account"
+            android:textColor="@color/_dark_green" />
 
-        app:layout_constraintTop_toBottomOf="@id/logInButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/registerNowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/_dark_green"
+            android:text="@string/register_now"
+            android:textColor="@color/white" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+      </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.cardview.widget.CardView>
 
   <ImageView
       android:id="@+id/runner"

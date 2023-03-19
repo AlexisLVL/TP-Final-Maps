@@ -7,6 +7,51 @@
     tools:context=".ListLocationsActivity"
     android:background="@color/green">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/green" >
+
+        <ImageButton
+            android:id="@+id/BackButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/green"
+            app:srcCompat="@drawable/return_icon"/>
+
+
+        <TextView
+            android:id="@+id/list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/list"
+            android:textColor="@color/_dark_green"
+            android:textSize="@dimen/ball_radius"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/MapButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/green"
+            app:srcCompat="@drawable/location_icon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ListView
         android:id="@+id/lvLocations"
         android:layout_width="match_parent"
@@ -15,48 +60,7 @@
         android:layout_marginVertical="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <RelativeLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/green" >
-
-        <ImageButton
-            android:id="@+id/BackButton"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_alignParentStart="true"
-            android:backgroundTint="@color/green"
-            app:srcCompat="@drawable/return_icon"/>
-
-
-        <TextView
-            android:id="@+id/list"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="0dp"
-            android:text="@string/list"
-            android:textSize="@dimen/ball_radius"
-            android:fontFamily="sans-serif"
-            android:textStyle="bold"
-            android:textColor="@color/_dark_green"/>
-
-        <ImageButton
-            android:id="@+id/MapButton"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/green"
-            app:srcCompat="@drawable/location_icon"/>
-    </RelativeLayout>
+        app:layout_constraintTop_toBottomOf="@+id/topNavBar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
