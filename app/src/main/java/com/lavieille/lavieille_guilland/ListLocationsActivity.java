@@ -35,12 +35,15 @@ import java.util.concurrent.Executors;
 public class ListLocationsActivity extends AppCompatActivity {
     public ArrayList<Location> arrayOfLocations = new ArrayList<>();
     public LocationsAdapter adapter;
+    private ImageButton mapButton;
 
     @SuppressLint({"NonConstantResourceId", "ResourceAsColor"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_locations);
+
+        mapButton = findViewById(R.id.MapButton);
 
         Intent intent = new Intent(this, LocationDetailActivity.class);
 

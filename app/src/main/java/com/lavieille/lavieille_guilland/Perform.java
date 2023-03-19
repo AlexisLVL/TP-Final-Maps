@@ -2,6 +2,7 @@ package com.lavieille.lavieille_guilland;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -10,6 +11,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -32,6 +35,7 @@ import java.util.Locale;
 public class Perform extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
+    private CardView gymIcon;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
     private Location mLastLocation;
