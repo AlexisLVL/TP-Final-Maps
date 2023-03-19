@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class DBFavorites {
+public class DBUsers {
     private final String connectionUrl = "jdbc:mysql://noproxy.hexteckgate.ga:13306/tp_note_app_mobile?useSSL=false";
     private final String user = "tp_app_mobile";
     private final String pass = "kp7Yawd4okt5E3ehWQQL";
@@ -75,6 +77,43 @@ public class DBFavorites {
             return statement.getResultSet().next();
         } catch (Exception ignored) {}
 
+        return false;
+    }
+
+    public PerformData getPerform(String uid) {
+        getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserPerform WHERE userUid='" + uid + "';");
+            statement.execute();
+            ResultSet res = statement.getResultSet();
+
+            if (res.next()) {
+                PerformData performData = new PerformData();
+                performData.setDistance(Double.parseDouble(res.getString("distance")));
+                performData.setDate(Date.from(Instant.parse(res.getString("date"))));
+
+                return performData;
+            }
+        } catch (Exception ignored) {}
+
+        return null;
+    }
+
+    public boolean setPerform(String uid, double distance, String date) {
+        getConnection();
+
+        try {
+            if (getPerform(uid) != null) {
+                PreparedStatement statement = connection.prepareStatement("UPDATE UserPerform SET distance='" + distance + "', date='" + date + "' WHERE userUid='" + uid + "'");
+                statement.execute();
+            } else {
+                // Initiate values in the database
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO UserPerform VALUES('" + uid + "', '" + distance + "', '" + date + "');");
+                statement.execute();
+            }
+            return true;
+        } catch (Exception ignored) {}
         return false;
     }
 }

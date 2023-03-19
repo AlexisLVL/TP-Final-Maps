@@ -1,12 +1,9 @@
 package com.lavieille.lavieille_guilland;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,13 +19,14 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import com.lavieille.lavieille_guilland.adapter.LocationsAdapter;
 import com.lavieille.lavieille_guilland.entity.Location;
-import com.lavieille.lavieille_guilland.utils.DBFavorites;
+import com.lavieille.lavieille_guilland.utils.DBUsers;
 import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -77,7 +75,7 @@ public class ListLocationsActivity extends AppCompatActivity {
                         }
                     });
 
-                    ArrayList<String> favorites = new DBFavorites().getFavorites(FirebaseConnection.getUser().getUid());
+                    ArrayList<String> favorites = new DBUsers().getFavorites(FirebaseConnection.getUser().getUid());
                     for (String favorite : favorites) {
                         setFavorite(true, listView.getChildAt(Integer.parseInt(favorite)));
                     }
@@ -104,7 +102,7 @@ public class ListLocationsActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(
                 (adapterView, view, i, l) -> {
                     Executors.newSingleThreadExecutor().execute(() -> {
-                        DBFavorites db = new DBFavorites();
+                        DBUsers db = new DBUsers();
                         if (db.isFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i))) {
                             db.removeFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i));
                             setFavorite(false, view);
