@@ -61,8 +61,8 @@ public class Perform extends AppCompatActivity {
                     if (isSameDay(mCurrentDate, new Date())) {
                         float distance = location.distanceTo(mLastLocation);
                         mTotalDistance += distance;
-                        kmStepText.setText(String.format(Locale.getDefault(), "%.2f pas", mTotalDistance / 0.75));
-                        mDistanceTextView.setText(String.format(Locale.getDefault(), "%.2f km", mTotalDistance / 1000));
+                        kmStepText.setText(String.format(Locale.getDefault(), "%.0f pas", mTotalDistance / 0.75));
+                        mDistanceTextView.setText(String.format(Locale.getDefault(), "%.3f km", mTotalDistance / 1000));
                         mLastLocation = location;
                     } else {
                         mCurrentDate = new Date();
