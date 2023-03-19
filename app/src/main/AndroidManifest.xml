@@ -41,8 +41,12 @@
             android:exported="false" />
 
         <activity
-        android:name=".MainActivity"
+        android:name=".LocationDetailActivity"
         android:exported="false" />
+        <activity
+            android:name=".Perform"
+            android:exported="false" />
+
         <activity
             android:name=".Perform"
             android:exported="false" />
@@ -50,6 +54,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCy8poguEHK_gbd9J1E_JAJ6pPR2Mtp9pg" />
+
     </application>
 
 </manifest>

@@ -1,15 +1,17 @@
 package com.lavieille.lavieille_guilland;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,11 +27,9 @@ import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,13 +38,13 @@ public class ListLocationsActivity extends AppCompatActivity {
     public ArrayList<Location> arrayOfLocations = new ArrayList<>();
     public LocationsAdapter adapter;
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "ResourceAsColor"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_locations);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LocationDetailActivity.class);
 
         ImageButton backButton = findViewById(R.id.BackButton);
         ImageButton mapButton = findViewById(R.id.MapButton);
@@ -76,6 +76,11 @@ public class ListLocationsActivity extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                         }
                     });
+
+                    ArrayList<String> favorites = new DBFavorites().getFavorites(FirebaseConnection.getUser().getUid());
+                    for (String favorite : favorites) {
+                        setFavorite(true, listView.getChildAt(Integer.parseInt(favorite)));
+                    }
                 }
             } catch (Exception e) {
                 Log.e("Error : connexion", e.getLocalizedMessage());
@@ -93,8 +98,8 @@ public class ListLocationsActivity extends AppCompatActivity {
                     }
                     intent.putExtra("location", location);
                     startActivity(intent);
-                    System.out.println("Short Click");
-                });
+                }
+        );
 
         listView.setOnItemLongClickListener(
                 (adapterView, view, i, l) -> {
@@ -102,8 +107,10 @@ public class ListLocationsActivity extends AppCompatActivity {
                         DBFavorites db = new DBFavorites();
                         if (db.isFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i))) {
                             db.removeFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i));
+                            setFavorite(false, view);
                         } else {
                             db.addFavorite(FirebaseConnection.getUser().getUid(), String.valueOf(i));
+                            setFavorite(true, view);
                         }
                     });
                     return true;
@@ -148,5 +155,13 @@ public class ListLocationsActivity extends AppCompatActivity {
 
     private ArrayList<LinkedTreeMap<String, String>> makeIntoTable(String json){
         return new Gson().fromJson(json, new TypeToken<ArrayList<LinkedTreeMap<String, String>>>(){}.getType());
+    }
+
+    private void setFavorite(boolean state, View view) {
+        if (state) {
+            view.findViewById(R.id.item).setBackgroundColor(getResources().getColor(R.color.orange_light));
+        } else {
+            view.findViewById(R.id.item).setBackgroundColor(getResources().getColor(R.color.white));
+        }
     }
 }
