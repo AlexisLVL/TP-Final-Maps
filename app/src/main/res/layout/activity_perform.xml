@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/activityText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
@@ -101,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/runCard"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
@@ -167,7 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/stepCard"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
