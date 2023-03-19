@@ -113,6 +113,7 @@ public class ListLocationsActivity extends AppCompatActivity {
         backButton.setOnClickListener(view -> {
             Intent intentMapActivity = new Intent(this, MapActivity.class);
             intentMapActivity.putExtra("arrayOfLocations", arrayOfLocations);
+            finish();
             startActivity(intentMapActivity);
         });
 
@@ -121,12 +122,14 @@ public class ListLocationsActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     Intent intentPerform = new Intent(ListLocationsActivity.this, Perform.class);
+                    finish();
                     startActivity(intentPerform);
                      return true;
 
                 case R.id.navigation_map:
                     Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
                     map.putExtra("arrayOfLocations", arrayOfLocations);
+                    finish();
                     startActivity(map);
                     return true;
 
@@ -135,6 +138,7 @@ public class ListLocationsActivity extends AppCompatActivity {
 
                 case R.id.navigation_logout:
                     Intent intentLogIn = new Intent(ListLocationsActivity.this, LandingActivity.class);
+                    finish();
                     startActivity(intentLogIn);
                     return true;
             }

@@ -83,12 +83,14 @@ public class Perform extends AppCompatActivity {
                         return true;
                     case R.id.navigation_map:
                         Intent intentListView = new Intent(Perform.this, ListLocationsActivity.class);
+                        finish();
                         startActivity(intentListView);
                         return true;
                     case R.id.navigation_settings:
                         return true;
                     case R.id.navigation_logout:
                         Intent intentLogIn = new Intent(Perform.this, LandingActivity.class);
+                        finish();
                         startActivity(intentLogIn);
                         return true;
                 }
