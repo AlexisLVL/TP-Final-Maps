@@ -119,8 +119,9 @@ public class ListLocationsActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    // Gérer l'événement de sélection pour l'élément Home
-                    return true;
+                    Intent intentPerform = new Intent(ListLocationsActivity.this, Perform.class);
+                    startActivity(intentPerform);
+                     return true;
                 case R.id.navigation_map:
                     // Gérer l'événement de sélection pour l'élément Search
                     Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
@@ -128,11 +129,9 @@ public class ListLocationsActivity extends AppCompatActivity {
                     startActivity(map);
                     return true;
                 case R.id.navigation_settings:
-                    Intent intentRegisterActivity = new Intent(ListLocationsActivity.this, LandingActivity.class);
-                    startActivity(intentRegisterActivity);
                     return true;
                 case R.id.navigation_logout:
-                    Intent intentLogIn = new Intent(ListLocationsActivity.this, RegisterActivity.class);
+                    Intent intentLogIn = new Intent(ListLocationsActivity.this, LandingActivity.class);
                     startActivity(intentLogIn);
                     return true;
             }

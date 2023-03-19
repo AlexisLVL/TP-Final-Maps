@@ -71,25 +71,22 @@ public class MapActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        // Gérer l'événement de sélection pour l'élément Home
+                        Intent intentPerform = new Intent(MapActivity.this, Perform.class);
+                        startActivity(intentPerform);
                         return true;
                     case R.id.navigation_map:
                         // Gérer l'événement de sélection pour l'élément Search
                         return true;
                     case R.id.navigation_settings:
-                        Intent intentRegisterActivity = new Intent(MapActivity.this, LandingActivity.class);
-                        startActivity(intentRegisterActivity);
                         return true;
                     case R.id.navigation_logout:
-                        Intent intentLogIn = new Intent(MapActivity.this, RegisterActivity.class);
+                        Intent intentLogIn = new Intent(MapActivity.this, LandingActivity.class);
                         startActivity(intentLogIn);
                         return true;
                 }
                 return false;
             }
         });
-
-        bottomNavigationView.setSelectedItemId(R.id.navigation_map);
     }
     @Override
     public void onResume() {

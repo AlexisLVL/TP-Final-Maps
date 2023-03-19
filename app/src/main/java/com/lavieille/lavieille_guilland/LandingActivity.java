@@ -40,7 +40,7 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
 
     @Override
     public void authSuccess() {
-        Intent intent = new Intent(this, ListLocationsActivity.class);
+        Intent intent = new Intent(this, Perform.class);
         startActivity(intent);
     }
 
