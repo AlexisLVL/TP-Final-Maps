@@ -12,21 +12,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/runnerdraw"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/activityText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activity"
+
+        android:text="@string/activity"
         android:textSize="@dimen/ball_radius"
         android:fontFamily="sans-serif"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+
         app:layout_constraintTop_toBottomOf="@id/runnerDrawImage"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -39,11 +40,13 @@
         app:layout_constraintTop_toBottomOf="@id/activityText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/runIcon"
                 android:layout_width="wrap_content"
@@ -53,6 +56,7 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:src="@drawable/run_icon"
                     android:layout_width="60dp"
@@ -62,14 +66,16 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
+
                 </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/runText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Run"
+                    android:text="@string/run"
                     android:textSize="@dimen/textview_width"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif"
                     android:textStyle="bold"
                     android:textColor="@color/orange"
@@ -81,10 +87,11 @@
                     android:id="@+id/kmRunText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20/30 km"
+                    android:text="@string/_20_30_km"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/orange"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -98,11 +105,13 @@
         app:layout_constraintTop_toBottomOf="@id/runCard"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/stepIcon"
                 android:layout_width="wrap_content"
@@ -112,6 +121,7 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:src="@drawable/walk_icon"
                     android:layout_width="60dp"
@@ -121,14 +131,17 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
+
             </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/stepText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Step"
+            android:layout_marginStart="10dp"
+
+            android:text="@string/step"
             android:textSize="@dimen/textview_width"
-            android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
             android:textColor="@color/orange"
@@ -140,7 +153,7 @@
             android:id="@+id/kmStepText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20/30 km"
+            android:text="@string/_20_30_km"
             android:textColor="@color/orange"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,6 +161,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/gymCard"
         android:layout_width="match_parent"
@@ -157,11 +171,13 @@
         app:layout_constraintTop_toBottomOf="@id/stepCard"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="10dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="10dp">
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/gymIcon"
                     android:layout_width="wrap_content"
@@ -185,8 +201,8 @@
                     android:id="@+id/gymText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gym"
-                    android:layout_marginLeft="10dp"
+                    android:text="@string/gym"
+                    android:layout_marginStart="10dp"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/textview_width"
                     android:fontFamily="sans-serif"
@@ -199,15 +215,16 @@
                     android:id="@+id/hourGymText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3/4 h"
+
+                    android:text="@string/_3_4_h"
                     android:textColor="@color/orange"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -217,6 +234,5 @@
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
