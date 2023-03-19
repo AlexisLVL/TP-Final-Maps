@@ -56,6 +56,7 @@ public class MapActivity extends AppCompatActivity {
         });
         viewLikedPlace.setOnClickListener(view -> {
             Intent intentListLocations = new Intent(MapActivity.this, ListLocationsActivity.class);
+            finish();
             startActivityForResult(intentListLocations, REQUEST_CODE);
         });
 
@@ -67,6 +68,7 @@ public class MapActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent intentPerform = new Intent(MapActivity.this, Perform.class);
+                        finish();
                         startActivity(intentPerform);
                         return true;
                     case R.id.navigation_map:
@@ -76,6 +78,7 @@ public class MapActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_logout:
                         Intent intentLogIn = new Intent(MapActivity.this, LandingActivity.class);
+                        finish();
                         startActivity(intentLogIn);
                         return true;
                 }
