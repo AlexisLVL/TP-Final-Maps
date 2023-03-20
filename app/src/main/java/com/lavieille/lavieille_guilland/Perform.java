@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +28,16 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lavieille.lavieille_guilland.utils.DBUsers;
+import com.lavieille.lavieille_guilland.utils.PerformData;
+import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.concurrent.Executors;
 
 public class Perform extends AppCompatActivity {
 
@@ -39,8 +46,8 @@ public class Perform extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
     private Location mLastLocation;
-    private float mTotalDistance;
-    private Date mCurrentDate;
+    private double mTotalDistance = Double.NaN;
+    private Instant mCurrentDate;
     private TextView mDistanceTextView, kmStepText;
 
     @Override
@@ -50,26 +57,25 @@ public class Perform extends AppCompatActivity {
 
         mDistanceTextView = findViewById(R.id.kmRunText);
         kmStepText = findViewById(R.id.kmStepText);
-        mCurrentDate = new Date();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         mLocationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                if (Double.isNaN(mTotalDistance)) return;
+
                 for (Location location : locationResult.getLocations()) {
                     if (mLastLocation == null) {
                         mLastLocation = location;
                     }
-                    if (isSameDay(mCurrentDate, new Date())) {
+                    if (isSameDay(mCurrentDate, Instant.now())) {
                         float distance = location.distanceTo(mLastLocation);
                         mTotalDistance += distance;
                         kmStepText.setText(String.format(Locale.getDefault(), "%.0f pas", mTotalDistance / 0.75));
                         mDistanceTextView.setText(String.format(Locale.getDefault(), "%.3f km", mTotalDistance / 1000));
                         mLastLocation = location;
                     } else {
-                        mCurrentDate = new Date();
+                        mCurrentDate = Instant.now();
                         mTotalDistance = 0;
                         mDistanceTextView.setText(String.format(Locale.getDefault(), "%.2f km", mTotalDistance / 1000));
                     }
@@ -77,29 +83,40 @@ public class Perform extends AppCompatActivity {
             }
         };
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        // Gérer l'événement de sélection pour l'élément Home
-                        return true;
-                    case R.id.navigation_map:
-                        Intent intentListView = new Intent(Perform.this, ListLocationsActivity.class);
-                        finish();
-                        startActivity(intentListView);
-                        return true;
-                    case R.id.navigation_settings:
-                        return true;
-                    case R.id.navigation_logout:
-                        Intent intentLogIn = new Intent(Perform.this, LandingActivity.class);
-                        finish();
-                        startActivity(intentLogIn);
-                        return true;
-                }
-                return false;
+        Executors.newSingleThreadExecutor().execute(() -> {
+            DBUsers db = new DBUsers();
+
+            PerformData perform = db.getPerform(FirebaseConnection.getUser().getUid());
+
+            if (perform == null) {
+                mTotalDistance = 0;
+                mCurrentDate = Instant.now();
+            } else {
+                mTotalDistance = perform.getDistance();
+                mCurrentDate = perform.getDate();
             }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    // Gérer l'événement de sélection pour l'élément Home
+                    return true;
+                case R.id.navigation_map:
+                    Intent intentListView = new Intent(Perform.this, ListLocationsActivity.class);
+                    finish();
+                    startActivity(intentListView);
+                    return true;
+                case R.id.navigation_settings:
+                    return true;
+                case R.id.navigation_logout:
+                    Intent intentLogIn = new Intent(Perform.this, LandingActivity.class);
+                    finish();
+                    startActivity(intentLogIn);
+                    return true;
+            }
+            return false;
         });
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
@@ -108,7 +125,7 @@ public class Perform extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, null);
+            mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, Looper.getMainLooper());
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
         }
@@ -119,9 +136,11 @@ public class Perform extends AppCompatActivity {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
-    private boolean isSameDay(Date date1, Date date2) {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        return fmt.format(date1).equals(fmt.format(date2));
+    private boolean isSameDay(Instant date1, Instant date2) {
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date1.);
+        //SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        return true;
     }
 
     private static LocationRequest createLocationRequest() {
@@ -138,7 +157,7 @@ public class Perform extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, null);
+                mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, Looper.getMainLooper());
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
@@ -147,7 +166,7 @@ public class Perform extends AppCompatActivity {
 
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, null);
+            mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, Looper.getMainLooper());
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
         }
@@ -172,4 +191,18 @@ public class Perform extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            DBUsers db = new DBUsers();
+
+            db.setPerform(
+                    FirebaseConnection.getUser().getUid(),
+                    mTotalDistance,
+                    Instant.now().toString()
+            );
+        });
+
+        super.onDestroy();
+    }
 }

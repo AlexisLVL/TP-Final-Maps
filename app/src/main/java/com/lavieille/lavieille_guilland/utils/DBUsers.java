@@ -91,7 +91,7 @@ public class DBUsers {
             if (res.next()) {
                 PerformData performData = new PerformData();
                 performData.setDistance(Double.parseDouble(res.getString("distance")));
-                performData.setDate(Date.from(Instant.parse(res.getString("date"))));
+                performData.setDate(Instant.parse(res.getString("date")));
 
                 return performData;
             }

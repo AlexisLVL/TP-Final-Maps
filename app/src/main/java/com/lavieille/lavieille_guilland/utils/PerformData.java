@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class PerformData {
     private double distance;
-    private Date date;
+    private Instant date;
 
     public double getDistance() {
         return distance;
@@ -15,11 +15,11 @@ public class PerformData {
         this.distance = distance;
     }
 
-    public Date getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 }
