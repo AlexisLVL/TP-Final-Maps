@@ -61,28 +61,30 @@ public class MapActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        Intent intentPerform = new Intent(MapActivity.this, Perform.class);
-                        finish();
-                        startActivity(intentPerform);
-                        return true;
-                    case R.id.navigation_map:
-                        // Gérer l'événement de sélection pour l'élément Search
-                        return true;
-                    case R.id.navigation_settings:
-                        return true;
-                    case R.id.navigation_logout:
-                        Intent intentLogIn = new Intent(MapActivity.this, LandingActivity.class);
-                        finish();
-                        startActivity(intentLogIn);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setSelectedItemId(R.id.navigation_map);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent intentPerform = new Intent(MapActivity.this, Perform.class);
+                    finish();
+                    startActivity(intentPerform);
+                    return true;
+
+                case R.id.navigation_map:
+                    finish();
+                    return true;
+
+                case R.id.navigation_logout:
+                    Intent intentLogIn = new Intent(MapActivity.this, LandingActivity.class);
+                    finish();
+                    startActivity(intentLogIn);
+                    return true;
             }
+            return false;
+        });
+
+        findViewById(R.id.BackButton).setOnClickListener(view -> {
+            finish();
         });
     }
 

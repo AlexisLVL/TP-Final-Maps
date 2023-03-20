@@ -25,4 +25,7 @@
     <string name="_3_4_h">3/4 h</string>
     <string name="run">Run</string>
     <string name="list">List</string>
+    <string name="home">Home</string>
+    <string name="maps">Maps</string>
+    <string name="log_out">Log Out</string>
 </resources>

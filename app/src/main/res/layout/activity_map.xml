@@ -7,20 +7,41 @@
     tools:context=".MapActivity"
     android:background="@color/green">
 
-    <TextView
-        android:id="@+id/mapText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/map"
-        android:textSize="@dimen/ball_radius"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textColor="@color/_dark_green"
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mapCard"/>
+        android:background="@color/green" >
+
+        <ImageButton
+            android:id="@+id/BackButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/green"
+            app:srcCompat="@drawable/return_icon"/>
+
+
+        <TextView
+            android:id="@+id/list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/map"
+            android:textColor="@color/_dark_green"
+            android:textSize="@dimen/ball_radius"
+            android:textStyle="bold" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mapCard"
@@ -61,6 +82,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

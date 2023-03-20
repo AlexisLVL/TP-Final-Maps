@@ -34,6 +34,7 @@ import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -103,13 +104,13 @@ public class Perform extends AppCompatActivity {
                 case R.id.navigation_home:
                     // Gérer l'événement de sélection pour l'élément Home
                     return true;
+
                 case R.id.navigation_map:
                     Intent intentListView = new Intent(Perform.this, ListLocationsActivity.class);
                     finish();
                     startActivity(intentListView);
                     return true;
-                case R.id.navigation_settings:
-                    return true;
+
                 case R.id.navigation_logout:
                     Intent intentLogIn = new Intent(Perform.this, LandingActivity.class);
                     finish();
@@ -137,10 +138,7 @@ public class Perform extends AppCompatActivity {
     }
 
     private boolean isSameDay(Instant date1, Instant date2) {
-        System.out.println(date1.compareTo(date2));
-        System.out.println(date1.);
-        //SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        return true;
+        return date1.truncatedTo(ChronoUnit.DAYS).equals(date2.truncatedTo(ChronoUnit.DAYS));
     }
 
     private static LocationRequest createLocationRequest() {

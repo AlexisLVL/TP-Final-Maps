@@ -47,7 +47,6 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, LocationDetailActivity.class);
 
-        ImageButton backButton = findViewById(R.id.BackButton);
         ImageButton mapButton = findViewById(R.id.MapButton);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -118,14 +117,14 @@ public class ListLocationsActivity extends AppCompatActivity {
                 }
         );
 
-        backButton.setOnClickListener(view -> {
+        mapButton.setOnClickListener(view -> {
             Intent intentMapActivity = new Intent(this, MapActivity.class);
             intentMapActivity.putExtra("arrayOfLocations", arrayOfLocations);
-            finish();
             startActivity(intentMapActivity);
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_map);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -135,13 +134,6 @@ public class ListLocationsActivity extends AppCompatActivity {
                      return true;
 
                 case R.id.navigation_map:
-                    Intent map = new Intent(ListLocationsActivity.this, MapActivity.class);
-                    map.putExtra("arrayOfLocations", arrayOfLocations);
-                    finish();
-                    startActivity(map);
-                    return true;
-
-                case R.id.navigation_settings:
                     return true;
 
                 case R.id.navigation_logout:
