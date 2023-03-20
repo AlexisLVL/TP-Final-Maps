@@ -37,11 +37,13 @@ public class DBUsers {
 
             ArrayList<String> favorites = new ArrayList<>();
             while(res.next()) {
-                favorites.add(res.getString(1));
+                favorites.add(res.getString("favoriteId"));
             }
 
             return favorites;
-        } catch (Exception ignored) {}
+        } catch (Exception database) {
+            System.out.println(database);
+        }
 
         return new ArrayList<>();
     }

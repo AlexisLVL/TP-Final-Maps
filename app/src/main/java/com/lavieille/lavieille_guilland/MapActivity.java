@@ -3,7 +3,6 @@ package com.lavieille.lavieille_guilland;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +16,6 @@ import com.lavieille.lavieille_guilland.entity.Location;
 import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE = 1;
     private MapView mapView;
 
     @SuppressLint("NonConstantResourceId")
@@ -30,20 +28,21 @@ public class MapActivity extends AppCompatActivity {
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(map -> {
-            Intent responseIntent = getIntent();
-            ArrayList<Location> arrayOfLocations = (ArrayList<Location>) responseIntent.getSerializableExtra("arrayOfLocations");
+            ArrayList<Location> arrayOfLocations = (ArrayList<Location>) getIntent().getSerializableExtra("arrayOfLocations");
 
-            for (Location location :
-                    arrayOfLocations) {
-                String[] latLng = location.getCoordinates().split(", ");
-                LatLng park = new LatLng(Double.parseDouble(latLng[0]), Double.parseDouble(latLng[1]));
-                map.addMarker(new MarkerOptions().position(park).title("Marker in " + location.getTitle()));
+            for (Location location : arrayOfLocations) {
+                String[] latitudeLongitude = location.getCoordinates().split(", ");
+                LatLng park = new LatLng(
+                        Double.parseDouble(latitudeLongitude[0]),
+                        Double.parseDouble(latitudeLongitude[1])
+                );
+                map.addMarker(new MarkerOptions().position(park).title(location.getTitle()));
             }
 
             LatLng lyon = new LatLng(45.7640, 4.8357);
             map.addMarker(new MarkerOptions().position(lyon).title("Marker in lyon"));
             // Déplacer la caméra pour que le marqueur soit centré sur la carte
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 12));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 11));
         });
 
 
@@ -70,9 +69,7 @@ public class MapActivity extends AppCompatActivity {
             return false;
         });
 
-        findViewById(R.id.BackButton).setOnClickListener(view -> {
-            finish();
-        });
+        findViewById(R.id.BackButton).setOnClickListener(view -> finish());
     }
 
 

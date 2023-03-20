@@ -51,6 +51,7 @@
           android:background="@drawable/rounded_edittext_focused"
           android:elevation="10dp"
           android:ems="10"
+          android:text="guillandrichard@gmail.com"
 
           android:hint="@string/username_email_phone"
           android:inputType="textPersonName"
@@ -71,6 +72,7 @@
           android:background="@drawable/rounded_edittext_focused"
           android:elevation="10dp"
           android:ems="10"
+          android:text="hexteckgate"
 
           android:hint="@string/password"
           android:inputType="textPassword"

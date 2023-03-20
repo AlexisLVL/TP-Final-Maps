@@ -3,11 +3,7 @@ package com.lavieille.lavieille_guilland;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,8 +27,9 @@ import java.util.Objects;
 import java.util.concurrent.Executors;
 
 public class ListLocationsActivity extends AppCompatActivity {
-    public ArrayList<Location> arrayOfLocations = new ArrayList<>();
-    public LocationsAdapter adapter;
+    private final ArrayList<Location> arrayOfLocations = new ArrayList<>();
+    private LocationsAdapter adapter;
+    private ListView listView;
 
     @SuppressLint({"NonConstantResourceId", "ResourceAsColor"})
     @Override
@@ -41,44 +38,39 @@ public class ListLocationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_locations);
 
         // Initialize the list view
-        ListView listView = findViewById(R.id.lvLocations);
+        listView = findViewById(R.id.lvLocations);
         adapter = new LocationsAdapter(this, arrayOfLocations);
         listView.setAdapter(adapter);
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                URL url = new URL   ("http://tp3.hexteckgate.ga/api.php");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) new URL("http://tp3.hexteckgate.ga/api.php").openConnection();
 
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                     BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String jsonData = input.readLine();
                     input.close();
 
-                    ArrayList<LinkedTreeMap<String, String>> jsonDataTable = convertIntoTable(jsonData);
+                    ArrayList<LinkedTreeMap<String, String>> datas = convertIntoArray(jsonData);
 
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        for (LinkedTreeMap<String, String> tmp : jsonDataTable) {
-                            arrayOfLocations.add(
-                                    new Location(
-                                            tmp.get("title"), tmp.get("address"),
-                                            tmp.get("coordinates"), tmp.get("description"),
-                                            tmp.get("note")
-                                    )
-                            );
-
-                        }
+                    for (LinkedTreeMap<String, String> data : datas) {
+                        arrayOfLocations.add(
+                                new Location(
+                                        data.get("title"), data.get("address"),
+                                        data.get("coordinates"), data.get("description"),
+                                        data.get("note")
+                                )
+                        );
+                    }
+                    runOnUiThread(() -> {
                         adapter.notifyDataSetChanged();
                     });
 
-                    // Color the background of favorites cards in the list
-                    ArrayList<String> favorites = new DBUsers().getFavorites(FirebaseConnection.getUser().getUid());
-                    for (String favorite : favorites) {
-                        setFavorite(true, listView.getChildAt(Integer.parseInt(favorite)));
-                    }
+                    colorFavorites();
                 }
-            } catch (Exception e) {
-                Log.e("Error : connexion", e.getLocalizedMessage());
+            } catch (Exception apiError) {
+                System.out.println(apiError.getMessage());
+                apiError.printStackTrace();
             }
         });
 
@@ -86,14 +78,13 @@ public class ListLocationsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
                     Location location = null;
-                    for (Location locationInArray:
-                         arrayOfLocations) {
-                        if (Objects.equals((String) ((TextView) view.findViewById(R.id.title)).getText(), locationInArray.getTitle())){
+                    for (Location locationInArray: arrayOfLocations) {
+                        if (Objects.equals(((TextView) view.findViewById(R.id.title)).getText(), locationInArray.getTitle())){
                             location = locationInArray;
                         }
                     }
-                    Intent intent = new Intent(this, LocationDetailActivity.class);
-                    intent.putExtra("location", location);
+                    Intent intent = new Intent(this, LocationDetailActivity.class)
+                            .putExtra("location", location);
                     startActivity(intent);
                 }
         );
@@ -117,8 +108,8 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         // Open the map activity
         findViewById(R.id.MapButton).setOnClickListener(view -> {
-            Intent intentMapActivity = new Intent(this, MapActivity.class);
-            intentMapActivity.putExtra("arrayOfLocations", arrayOfLocations);
+            Intent intentMapActivity = new Intent(this, MapActivity.class)
+                    .putExtra("arrayOfLocations", arrayOfLocations);
             startActivity(intentMapActivity);
         });
 
@@ -136,8 +127,10 @@ public class ListLocationsActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_logout:
-                    Intent intentLogIn = new Intent(this, LandingActivity.class);
-                    intentLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent intentLogIn = new Intent(this, LandingActivity.class)
+                            .addFlags(
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK
+                            );
                     startActivity(intentLogIn);
                     return true;
             }
@@ -150,7 +143,7 @@ public class ListLocationsActivity extends AppCompatActivity {
      * @param json The datas
      * @return ArrayList<LinkedTreeMap<String, String>>
      */
-    private ArrayList<LinkedTreeMap<String, String>> convertIntoTable(String json){
+    private ArrayList<LinkedTreeMap<String, String>> convertIntoArray(String json){
         return new Gson().fromJson(json, new TypeToken<ArrayList<LinkedTreeMap<String, String>>>(){}.getType());
     }
 
@@ -161,9 +154,28 @@ public class ListLocationsActivity extends AppCompatActivity {
      */
     private void setFavorite(boolean state, View view) {
         if (state) {
-            view.findViewById(R.id.item).setBackgroundColor(getResources().getColor(R.color.orange_light));
+            view.findViewById(R.id.item).setBackgroundColor(
+                    getResources().getColor(R.color.orange_light)
+            );
         } else {
-            view.findViewById(R.id.item).setBackgroundColor(getResources().getColor(R.color.white));
+            view.findViewById(R.id.item).setBackgroundColor(
+                    getResources().getColor(R.color.white)
+            );
+        }
+    }
+
+    private void colorFavorites() {
+        // Color the background of favorites cards in the list
+        ArrayList<String> favorites = new DBUsers().getFavorites(FirebaseConnection.getUser().getUid());
+
+        for (String favorite : favorites) {
+            try {
+                runOnUiThread(() -> {
+                    setFavorite(true, listView.getChildAt(Integer.parseInt(favorite)));
+                });
+            }catch (Exception e) {
+                throw e;
+            }
         }
     }
 }

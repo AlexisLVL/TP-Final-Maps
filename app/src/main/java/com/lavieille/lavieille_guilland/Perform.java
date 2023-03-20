@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -36,7 +35,6 @@ import java.util.concurrent.Executors;
 public class Perform extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
-    private CardView gymIcon;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
     private Location mLastLocation;
@@ -57,6 +55,7 @@ public class Perform extends AppCompatActivity {
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
+                // While mTotalDistance not initialized by the database
                 if (Double.isNaN(mTotalDistance)) return;
 
                 for (Location location : locationResult.getLocations()) {
@@ -79,10 +78,7 @@ public class Perform extends AppCompatActivity {
         };
 
         Executors.newSingleThreadExecutor().execute(() -> {
-            DBUsers db = new DBUsers();
-
-            PerformData perform = db.getPerform(FirebaseConnection.getUser().getUid());
-
+            PerformData perform = new DBUsers().getPerform(FirebaseConnection.getUser().getUid());
             if (perform == null) {
                 mTotalDistance = 0;
                 mCurrentDate = Instant.now();
@@ -93,6 +89,7 @@ public class Perform extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -100,7 +97,6 @@ public class Perform extends AppCompatActivity {
 
                 case R.id.navigation_map:
                     Intent intentListView = new Intent(Perform.this, ListLocationsActivity.class);
-                    finish();
                     startActivity(intentListView);
                     return true;
 
@@ -112,7 +108,8 @@ public class Perform extends AppCompatActivity {
             }
             return false;
         });
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
+        checkLocationEnabled();
     }
 
     @Override
@@ -135,11 +132,10 @@ public class Perform extends AppCompatActivity {
     }
 
     private static LocationRequest createLocationRequest() {
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(500);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        return locationRequest;
+        return LocationRequest.create()
+                .setInterval(1000)
+                .setFastestInterval(500)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     @SuppressLint("MissingPermission")
@@ -155,45 +151,30 @@ public class Perform extends AppCompatActivity {
         }
     }
 
-    private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mFusedLocationClient.requestLocationUpdates(createLocationRequest(), mLocationCallback, Looper.getMainLooper());
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
-        }
-    }
-
     private void checkLocationEnabled() {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean gpsEnabled = false;
         boolean networkEnabled = false;
         try {
             gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        } catch (Exception ignore) {}
         try {
             networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        } catch (Exception ignore) {}
         if (!gpsEnabled && !networkEnabled) {
-            Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enable location services.", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onDestroy() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            DBUsers db = new DBUsers();
-
-            db.setPerform(
+            new DBUsers().setPerform(
                     FirebaseConnection.getUser().getUid(),
                     mTotalDistance,
                     Instant.now().toString()
             );
         });
-
         super.onDestroy();
     }
 }

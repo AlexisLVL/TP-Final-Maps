@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Runner</string>
-    <string name="title_activity_register">RegisterActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -10,14 +9,13 @@
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
     <string name="register_now">Register Now</string>
-    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="pseudo">Pseudo</string>
     <string name="email">Email</string>
     <string name="password_register">Password</string>
     <string name="don_t_you_have_an_account">Don\'t you have an account?</string>
     <string name="login">Login</string>
     <string name="map">Map</string>
-    <string name="view_liked_place">View Liked Place</string>
     <string name="activity">Activity</string>
     <string name="step">Step</string>
     <string name="gym">Gym</string>
@@ -29,4 +27,5 @@
     <string name="log_out">Log Out</string>
     <string name="location_detail">Location Detail</string>
     <string name="loading">...</string>
+    <string name="_0_000_km">0,000 km</string>
 </resources>

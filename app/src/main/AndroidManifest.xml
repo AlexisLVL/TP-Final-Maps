@@ -43,9 +43,6 @@
         <activity
         android:name=".LocationDetailActivity"
         android:exported="false" />
-        <activity
-            android:name=".Perform"
-            android:exported="false" />
 
         <activity
             android:name=".Perform"

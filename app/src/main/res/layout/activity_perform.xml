@@ -87,7 +87,7 @@
                     android:id="@+id/kmRunText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.000 km"
+                    android:text="@string/_0_000_km"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/orange"/>
