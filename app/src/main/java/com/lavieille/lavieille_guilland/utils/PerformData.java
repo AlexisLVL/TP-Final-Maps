@@ -1,7 +1,6 @@
 package com.lavieille.lavieille_guilland.utils;
 
 import java.time.Instant;
-import java.util.Date;
 
 public class PerformData {
     private double distance;

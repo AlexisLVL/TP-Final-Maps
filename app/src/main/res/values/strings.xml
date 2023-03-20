@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Lavieille_Guilland</string>
+    <string name="app_name">Runner</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="register_title">Register</string>
-    <string name="username_email_phone">Username, Email, Phone</string>
+    <string name="username_email_phone">Email</string>
     <string name="connexion">Connexion</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
@@ -20,12 +20,13 @@
     <string name="view_liked_place">View Liked Place</string>
     <string name="activity">Activity</string>
     <string name="step">Step</string>
-    <string name="_20_30_km">20/30 km</string>
     <string name="gym">Gym</string>
-    <string name="_3_4_h">3/4 h</string>
+    <string name="_3_4_h">¾ h</string>
     <string name="run">Run</string>
     <string name="list">List</string>
     <string name="home">Home</string>
     <string name="maps">Maps</string>
     <string name="log_out">Log Out</string>
+    <string name="location_detail">Location Detail</string>
+    <string name="loading">...</string>
 </resources>

@@ -1,20 +1,14 @@
 package com.lavieille.lavieille_guilland;
 
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,8 +26,6 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-
-        Button viewLikedPlace = findViewById(R.id.viewLikedPlaceButton);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -53,11 +45,6 @@ public class MapActivity extends AppCompatActivity {
             // Déplacer la caméra pour que le marqueur soit centré sur la carte
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(lyon, 12));
         });
-        viewLikedPlace.setOnClickListener(view -> {
-            Intent intentListLocations = new Intent(MapActivity.this, ListLocationsActivity.class);
-            finish();
-            startActivityForResult(intentListLocations, REQUEST_CODE);
-        });
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -75,8 +62,8 @@ public class MapActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_logout:
-                    Intent intentLogIn = new Intent(MapActivity.this, LandingActivity.class);
-                    finish();
+                    Intent intentLogIn = new Intent(this, LandingActivity.class);
+                    intentLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentLogIn);
                     return true;
             }

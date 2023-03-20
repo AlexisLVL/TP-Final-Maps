@@ -31,11 +31,8 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
     }
 
     private void switchToRegister() {
-        RegisterActivity activity = new RegisterActivity();
         Intent intent = new Intent(this, RegisterActivity.class);
-
         startActivity(intent);
-        finish();
     }
 
     @Override
@@ -47,7 +44,7 @@ public class LandingActivity extends AppCompatActivity implements AuthSuccess {
     @Override
     public void authFailure() {
         String message = "Email ou mot de passe incorrecte.";
-        if (!CheckConnection.isInternetAvailable(this)) {
+        if (!CheckConnection.isNetworkConnected(this)) {
             message = "Pas de connection à internet.";
         }
         Toast.makeText(

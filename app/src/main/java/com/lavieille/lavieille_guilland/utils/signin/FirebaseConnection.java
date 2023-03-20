@@ -5,6 +5,8 @@ import android.app.Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.concurrent.Executors;
+
 public class FirebaseConnection {
     private AuthSuccess activity;
     private FirebaseAuth mAuth;
@@ -16,6 +18,11 @@ public class FirebaseConnection {
     }
 
     public void createAccount(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            activity.authFailure();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) activity, task -> {
                     if (task.isSuccessful()) {
@@ -27,6 +34,11 @@ public class FirebaseConnection {
     }
 
     public void connectAccount(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            activity.authFailure();
+            return;
+        }
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) activity, task -> {
                     if (task.isSuccessful()) {

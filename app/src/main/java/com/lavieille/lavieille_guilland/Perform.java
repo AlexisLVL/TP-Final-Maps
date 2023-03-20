@@ -1,29 +1,25 @@
 package com.lavieille.lavieille_guilland;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Looper;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.os.Looper;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -32,12 +28,9 @@ import com.lavieille.lavieille_guilland.utils.DBUsers;
 import com.lavieille.lavieille_guilland.utils.PerformData;
 import com.lavieille.lavieille_guilland.utils.signin.FirebaseConnection;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.Executors;
 
 public class Perform extends AppCompatActivity {
@@ -51,6 +44,7 @@ public class Perform extends AppCompatActivity {
     private Instant mCurrentDate;
     private TextView mDistanceTextView, kmStepText;
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +96,6 @@ public class Perform extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    // Gérer l'événement de sélection pour l'élément Home
                     return true;
 
                 case R.id.navigation_map:
@@ -112,8 +105,8 @@ public class Perform extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_logout:
-                    Intent intentLogIn = new Intent(Perform.this, LandingActivity.class);
-                    finish();
+                    Intent intentLogIn = new Intent(this, LandingActivity.class);
+                    intentLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentLogIn);
                     return true;
             }

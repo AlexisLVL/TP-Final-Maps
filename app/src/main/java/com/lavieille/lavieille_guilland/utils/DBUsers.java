@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DBUsers {
     private final String connectionUrl = "jdbc:mysql://noproxy.hexteckgate.ga:13306/tp_note_app_mobile?useSSL=false";
@@ -23,6 +22,11 @@ public class DBUsers {
         } catch (Exception ignored) {}
     }
 
+    /**
+     * Return a list of favorites
+     * @param uid The user ID given by Firebase
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getFavorites(String uid) {
         getConnection();
 
@@ -42,6 +46,12 @@ public class DBUsers {
         return new ArrayList<>();
     }
 
+    /**
+     * Add a favorite in the database
+     * @param uid The user ID given by Firebase
+     * @param favoriteID The ID of the position of the favorite
+     * @return True on success, false otherwise
+     */
     public boolean addFavorite(String uid, String favoriteID) {
         getConnection();
 
@@ -55,6 +65,12 @@ public class DBUsers {
         return false;
     }
 
+    /**
+     * Remove a favorite in the database
+     * @param uid The user ID given by Firebase
+     * @param favoriteID The ID of the position of the favorite
+     * @return True on success, false otherwise
+     */
     public boolean removeFavorite(String uid, String favoriteID) {
         getConnection();
 
@@ -68,6 +84,12 @@ public class DBUsers {
         return false;
     }
 
+    /**
+     * Check if the given favorite is in the database
+     * @param uid The user ID given by Firebase
+     * @param favoriteID The ID of the position of the favorite
+     * @return True if is a favorite, false otherwise
+     */
     public boolean isFavorite(String uid, String favoriteID) {
         getConnection();
 
@@ -80,6 +102,11 @@ public class DBUsers {
         return false;
     }
 
+    /**
+     * Get the performances of a user
+     * @param uid The user ID given by Firebase
+     * @return PerformData
+     */
     public PerformData getPerform(String uid) {
         getConnection();
 
@@ -100,6 +127,13 @@ public class DBUsers {
         return null;
     }
 
+    /**
+     * Save to the database the performances of a user to restore values after closed the app.
+     * @param uid The user ID given by Firebase
+     * @param distance The actual distance of the user
+     * @param date The actual Date
+     * @return True on success, false otherwise
+     */
     public boolean setPerform(String uid, double distance, String date) {
         getConnection();
 

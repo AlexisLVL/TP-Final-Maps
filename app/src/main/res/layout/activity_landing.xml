@@ -55,7 +55,6 @@
           android:hint="@string/username_email_phone"
           android:inputType="textPersonName"
           android:padding="7dp"
-          android:text="guillandrichard@gmail.com"
           android:textColor="@color/white"
           android:textColorHint="@color/white"
 
@@ -76,7 +75,6 @@
           android:hint="@string/password"
           android:inputType="textPassword"
           android:padding="7dp"
-          android:text="hexteckgate"
           android:textColor="@color/white"
           android:textColorHint="@color/white"
 

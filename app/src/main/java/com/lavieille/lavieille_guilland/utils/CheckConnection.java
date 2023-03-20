@@ -7,23 +7,13 @@ import android.net.ConnectivityManager;
 import java.net.InetAddress;
 
 public class CheckConnection {
+    /**
+     * Checks if a network is connected
+     * @param activity The activity that ask for the check
+     * @return True if a network is connected, false otherwise
+     */
     public static boolean isNetworkConnected(Activity activity) {
         ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
-    }
-
-    public static boolean isInternetWorking() {
-        try {
-            InetAddress result = InetAddress.getByName("google.com");
-            return !result.toString().equals("");
-        } catch (Exception ignored) {}
-        return false;
-    }
-
-    public static boolean isInternetAvailable(Activity activity) {
-        if (isNetworkConnected(activity)) {
-            return isInternetWorking();
-        }
-        return false;
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable();
     }
 }

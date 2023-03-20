@@ -15,7 +15,7 @@ public class LocationDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_location_detail);
 
         Intent responseIntent = getIntent();
         Location location = (Location) responseIntent.getSerializableExtra("location");
@@ -25,5 +25,7 @@ public class LocationDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.coordinates)).setText(location.getCoordinates());
         ((TextView) findViewById(R.id.description)).setText(location.getDescription());
         ((TextView) findViewById(R.id.note)).setText(String.format("Note %s/10", location.getNote()));
+
+        findViewById(R.id.BackButton).setOnClickListener(view -> finish());
     }
 }

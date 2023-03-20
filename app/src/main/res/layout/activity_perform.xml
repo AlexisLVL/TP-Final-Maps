@@ -87,7 +87,7 @@
                     android:id="@+id/kmRunText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_20_30_km"
+                    android:text="0.000 km"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/orange"/>
@@ -153,7 +153,7 @@
             android:id="@+id/kmStepText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/_20_30_km"
+            android:text="0 pas"
             android:textColor="@color/orange"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -231,6 +231,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemTextColor="@color/_dark_green"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"

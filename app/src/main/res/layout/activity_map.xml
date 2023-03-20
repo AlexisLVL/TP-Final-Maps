@@ -46,12 +46,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/mapCard"
         android:layout_width="381dp"
-        android:layout_height="477dp"
+        android:layout_height="500dp"
         app:cardCornerRadius="16dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/viewLikedPlaceButton">
+        app:layout_constraintTop_toBottomOf="@id/topNavBar" >
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
@@ -61,27 +61,12 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/viewLikedPlaceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/_dark_green"
-
-        android:text="@string/view_liked_place"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapCard"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemTextColor="@color/_dark_green"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintBottom_toBottomOf="parent"
